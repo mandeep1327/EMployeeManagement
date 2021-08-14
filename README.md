@@ -2,14 +2,15 @@
 This microservice is used to  add and get employees of a given instructor. Eg: 
 
 Add Api:
-http://localhost:8085/addEmployee/Instructor4/mandeep
+http://localhost:8085/addEmployee/Instructor4/mandeep 
+
 input:
-{Instructor4} act as parent 
+{Instructor4} act as parent  
 {mandeep} act as empName which needs to be added under this parent
 
-Get Api:
-http://localhost:8085/getEmployees/Instructor4
-input : {Instructor4} 
+Get Api: 
+http://localhost:8085/getEmployees/Instructor4 
+input : {Instructor4}  
 
 output:   {
 "empName": "mandeep",
