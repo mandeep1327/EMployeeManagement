@@ -10,6 +10,6 @@ import java.util.List;
  */
 public interface GetEmployeeService {
 
-	List<Employee> getEmployees(EmployeeDTO inputDTO);
+	List<Employee> findByName(EmployeeDTO inputDTO);
 
 }

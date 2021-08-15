@@ -6,10 +6,20 @@ import java.util.Objects;
 public class Employee implements Serializable {
 	private String empName;
 	private Employee parent;
-
+	private String relation;
 	public  Employee(String empName,Employee parent){
 		this.empName=empName;
 		this.parent=parent;
+	}
+	public  Employee(){
+	}
+
+	public String getRelation() {
+		return relation;
+	}
+
+	public void setRelation(String relation) {
+		this.relation = relation;
 	}
 
 	public Employee getParent() {

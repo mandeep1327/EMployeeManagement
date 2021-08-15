@@ -16,29 +16,31 @@ import java.util.List;
  */
 @Service
 public class AddEmployeeServiceImpl implements AddEmployeeService {
-	private static final Logger LOGGER = LoggerFactory.getLogger(AddEmployeeServiceImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(AddEmployeeServiceImpl.class);
 
-	private final AddEmployeeRepository repository;
-	List<Employee> employees;
+    private final AddEmployeeRepository repository;
+    List<Employee> employees;
 
-	public AddEmployeeServiceImpl(AddEmployeeRepository repository,List<Employee> employees) {
-		this.employees=employees;
-		this.repository = repository;
-	}
-	
-	@Override
-	public void  addEmployees(EmployeeDTO inputDTO) {
-		Employee search=new Employee(inputDTO.getParent(),null);
-		Employee parent=employees.stream().
-				  filter(emp->emp.equals(search))
-				.findAny()
-				.orElse(null);
-		search.setEmpName(inputDTO.getEmpName());
-		search.setParent(parent);
-		repository.addEmployee(search);
-		employees.stream().forEach(System.out::println);
+    public AddEmployeeServiceImpl(AddEmployeeRepository repository, List<Employee> employees) {
+        this.employees = employees;
+        this.repository = repository;
+    }
 
-	}
+    @Override
+    public void addEmployees(EmployeeDTO inputDTO) {
+        final Employee search = new Employee(inputDTO.getParent(), null);
+        Employee parent = employees.stream().
+                filter(emp -> emp.equals(search))
+                .findAny().orElse(new Employee());
+
+        search.setEmpName(inputDTO.getEmpName());
+        search.setParent(parent);
+
+
+        repository.addEmployee(search);
+        employees.stream().forEach(System.out::println);
+
+    }
 
 
 }

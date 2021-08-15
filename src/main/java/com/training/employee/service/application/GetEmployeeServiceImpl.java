@@ -27,14 +27,12 @@ public class GetEmployeeServiceImpl implements GetEmployeeService {
 	}
 
 	@Override
-	public List<Employee> getEmployees(EmployeeDTO inputDTO) {
-		System.out.println("GetEmployee="+inputDTO.getEmpName());
+	public List<Employee> findByName(EmployeeDTO inputDTO) {
 		List<Employee>  employees=repository.getEmployees();
-		List<Employee> getEmployees=employees.stream().filter(userEntity -> userEntity.getParent() != null)
+		List<Employee> response=employees.stream().filter(userEntity -> userEntity.getParent() != null)
 				.filter(emp->emp.getParent().getEmpName().equals(inputDTO.getEmpName()))
 				.collect(Collectors.toList());
-			//	.forEach(System.out::println);
-          return getEmployees;
+		return response;
 	}
 
 

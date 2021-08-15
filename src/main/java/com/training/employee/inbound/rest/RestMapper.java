@@ -12,9 +12,9 @@ public class RestMapper {
 
 
 	public List<EmployeeDTO> employeeModelToDto(List<Employee> employees) {
-       List<EmployeeDTO> response=  employees.stream()
-               .map(p -> new EmployeeDTO(p.getEmpName(), p.getParent().getEmpName()))
-               .collect(Collectors.toList());
+		List<EmployeeDTO> response=  employees.stream().filter(userEntity -> userEntity.getParent() != null)
+				.map(emp -> new EmployeeDTO(emp.getEmpName(), emp.getParent().getEmpName()))
+				.collect(Collectors.toList());
 		return response;
 	}
 }
