@@ -21,7 +21,7 @@ public class AddEmployeeApiDelegateImpl implements AddEmployeeApiDelegate {
 
 	public ResponseEntity<EmployeeDTO> addEmployee( String parent,String empName) {
 		EmployeeDTO inputDTO=new EmployeeDTO();
-		inputDTO.setParent(parent);
+		inputDTO.setParentId(parent);
 		inputDTO.setEmpName(empName);
 		Employee resp=service.addEmployees(inputDTO);
 		return new ResponseEntity<>(mapper.createEmployeeModelToDto(resp),HttpStatus.OK);

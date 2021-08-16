@@ -26,11 +26,13 @@ configurations {
 repositories {
     mavenCentral()
 }
-/*test {
+
+test {
+    useJUnitPlatform()
     filter {
         includeTestsMatching "*Test"
     }
-}*/
+}
 
 
 dependencies {
@@ -42,7 +44,4 @@ dependencies {
 }
 
 
-test {
 
-    useJUnitPlatform()
-}

@@ -13,8 +13,8 @@ import java.util.List;
 public interface GetEmployeeApiDelegate {
 
 
-    @GetMapping("/getEmployees/{name}")
+    @GetMapping("/getEmployees/{id}")
     @ResponseBody
-    public ResponseEntity<List<EmployeeDTO>> getEmployees(@PathVariable String name) ;
+    public ResponseEntity<List<EmployeeDTO>> getEmployees(@PathVariable String id) ;
 
 }

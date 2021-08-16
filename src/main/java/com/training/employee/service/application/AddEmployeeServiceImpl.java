@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.Map;
 
 
 /**
@@ -22,37 +22,37 @@ public class AddEmployeeServiceImpl implements AddEmployeeService {
 
     private final AddEmployeeRepository repository;
     List<Employee> employees;
+    Map<String,Integer> employeeIndex;
     int nextId =1;
-    public AddEmployeeServiceImpl(AddEmployeeRepository repository, List<Employee> employees) {
+    public AddEmployeeServiceImpl(AddEmployeeRepository repository, List<Employee> employees,  Map<String,Integer> employeeIndex) {
         this.employees = employees;
         this.repository = repository;
+        this.employeeIndex=employeeIndex;
     }
 
     @Override
     public Employee addEmployees(EmployeeDTO inputDTO) {
-        Employee search = new Employee(inputDTO.getParent(), null);
-        Employee employee = employees.stream().
-                filter(emp -> emp.equals(search))
-                .findAny().orElse(employees.get(0));
-        search.setEmpName(inputDTO.getEmpName());
-        search.setParent(employee);
-        search.setEmployeeId(nextId);
-        repository.addEmployee(search);
-        nextId++;
 
-        return getEmployee(search.getEmployeeId());
+        Integer currentIndex = employeeIndex.get(inputDTO.getParentId());
+        //employeeIndex.entrySet().stream().forEach(key-> System.out.println(key.getKey()+":"+key.getValue()));
+        Employee employee = employees.get(currentIndex);
+        Employee subordinate = new Employee(inputDTO.getEmpName(), employee);
+        subordinate.setEmployeeId(String.valueOf(nextId));
+        employee.addSubordinate(subordinate);
+        repository.addEmployee(subordinate);
+
+        employeeIndex.put(String.valueOf(nextId), currentIndex + 1);
+        nextId++;
+        return  getEmployee(employee.getEmployeeId());
 
     }
 
-    private Employee getEmployee(int employeeId) {
-
-        Optional<Employee> emp= employees.stream()
-                .filter(empl->empl.getEmployeeId()==employeeId)
-                .findFirst();
-        if(!emp.isPresent()){
+    private Employee getEmployee(String employeeId) {
+        Employee emp= employees.get(employeeIndex.get(employeeId));
+        if(emp==null){
             throw new NotFoundException("Employee not found, id: " + employeeId);
         }
-        return emp.get();
+        return emp;
     }
 
 

@@ -19,10 +19,10 @@ public class RestMapper {
 	}
 	public EmployeeDTO createEmployeeModelToDto(Employee employee) {
 		EmployeeDTO response=new EmployeeDTO();
-		response.setEmployeeId(employee.getEmployeeId());
-		response.setEmpName(employee.getEmpName());
+		String employeeId = employee.getEmployeeId();
+		response.setParentId(String.valueOf(employeeId.length()));
 		if(null!=employee.getParent()) {
-			response.setParent(employee.getParent().getEmpName());
+			response.setEmpName(employee.getParent().getEmpName());
 		}
 		return response;
 	}
