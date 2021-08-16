@@ -1,24 +1,41 @@
 package com.training.employee.service.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Employee implements Serializable {
 	private String empName;
 	private Employee parent;
-	private int  employeeId;
+	private String  employeeId;
+	List<Employee> subordinates=new ArrayList<>();
+
 	public  Employee(String empName,Employee parent){
 		this.empName=empName;
 		this.parent=parent;
 	}
-    public Employee(){
+	public Employee(){
 
 	}
-	public int getEmployeeId() {
+
+	public void addSubordinate(Employee e){
+		subordinates.add(e);
+	}
+
+	public List<Employee> getSubordinates() {
+		return subordinates;
+	}
+
+	public void setSubordinates(List<Employee> subordinates) {
+		this.subordinates = subordinates;
+	}
+
+	public String getEmployeeId() {
 		return employeeId;
 	}
 
-	public void setEmployeeId(int employeeId) {
+	public void setEmployeeId(String employeeId) {
 		this.employeeId = employeeId;
 	}
 
@@ -26,33 +43,29 @@ public class Employee implements Serializable {
 		return parent;
 	}
 
-	public void setParent(Employee parent) {
-		this.parent = parent;
-	}
 
 	public String getEmpName() {
 		return empName;
 	}
 
-	public void setEmpName(String empName) {
-		this.empName = empName;
-	}
-	@Override
-	public int hashCode() {
-		return Objects.hash(empName);
-	}
 
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		Employee employee = (Employee) o;
-		return empName.equalsIgnoreCase(employee.empName);
+		return employeeId == employee.employeeId;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(employeeId);
 	}
 
 	@Override
 	public String toString() {
 		return "Employee{" +
+				"employeeId='" + employeeId + '\'' +
 				"empName='" + empName + '\'' +
 				", parent=" + (parent==null?"null":parent.getEmpName()) +
 				'}';

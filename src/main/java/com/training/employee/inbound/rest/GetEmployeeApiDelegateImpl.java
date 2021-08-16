@@ -6,6 +6,7 @@ import com.training.employee.service.ports.GetEmployeeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -21,10 +22,10 @@ public class GetEmployeeApiDelegateImpl implements GetEmployeeApiDelegate {
 		this.service = service;
 	}
 
-	public  ResponseEntity<List<EmployeeDTO>> getEmployees(String name) {
+	public  ResponseEntity<List<EmployeeDTO>> getEmployees(String id) {
 		EmployeeDTO inputDTO=new EmployeeDTO();
-		inputDTO.setEmpName(name);
-		List<Employee> employees=service.findByName(inputDTO);
+		inputDTO.setParentId(id);
+		List<Employee> employees=service.findById(inputDTO);
 		List<EmployeeDTO> response= mapper.employeeModelToDto(employees);
 		return new ResponseEntity<>(response,HttpStatus.OK);
 	}

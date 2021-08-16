@@ -4,20 +4,20 @@ This microservice is used to  add and get employees of a given instructor. Eg:
 
 | Service endpoint                               | Verb    |                               
 | -----------------------------------------------| ------- |
-| /addEmployee/{parent}/{empName}                |  POST   |   
-| /getEmployees/{name}                           |  GET    |    
+| /addEmployee/{parentId}/{empName}                |  POST   |   
+| /getEmployees/{id}                           |  GET    |    
 
 
 Add Api:
-http://localhost:8085/addEmployee/admin/I1 
+http://localhost:8085/addEmployee/0/I1 
 
 input:
-{admin} act as parent  
+{0} act as parentId  
 {I1} act as empName which needs to be added under this parent
 
 Get Api: 
-http://localhost:8085/getEmployees/admin
-input : {name}  
+http://localhost:8085/getEmployees/1
+input : {id}  
 
 output:   {
 "empName": "I1",
