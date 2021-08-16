@@ -13,8 +13,8 @@ import java.util.List;
 @Component
 public class GetEmployeeApiDelegateImpl implements GetEmployeeApiDelegate {
 
-	private GetEmployeeService service;
-    private RestMapper mapper;
+	private final GetEmployeeService service;
+	private final RestMapper mapper;
 	public GetEmployeeApiDelegateImpl(GetEmployeeService service,RestMapper mapper)
 	{
 		this.mapper=mapper;
@@ -22,11 +22,10 @@ public class GetEmployeeApiDelegateImpl implements GetEmployeeApiDelegate {
 	}
 
 	public  ResponseEntity<List<EmployeeDTO>> getEmployees(String name) {
-	    EmployeeDTO inputDTO=new EmployeeDTO();
+		EmployeeDTO inputDTO=new EmployeeDTO();
 		inputDTO.setEmpName(name);
-		List<Employee> employees=service.getEmployees(inputDTO);
+		List<Employee> employees=service.findByName(inputDTO);
 		List<EmployeeDTO> response= mapper.employeeModelToDto(employees);
-		System.out.println("Employee List->"+response.size());
 		return new ResponseEntity<>(response,HttpStatus.OK);
 	}
 }
