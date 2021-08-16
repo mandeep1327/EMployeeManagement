@@ -1,5 +1,6 @@
 package com.training.employee.inbound.rest;
 
+import com.training.employee.inbound.rest.dto.EmployeeDTO;
 import com.training.employee.service.model.Employee;
 import com.training.employee.service.ports.AddEmployeeService;
 import org.junit.Before;
@@ -18,10 +19,11 @@ import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringRunner.class)
 public class AddEmployeeApiDelegateTest {
-
+	private final int EMPLOYEEID = 0;
 	@MockBean
 	private AddEmployeeService mockService;
-
+	@MockBean
+	private  RestMapper mapper;
 
 	private AddEmployeeApiDelegate delegate;
 
@@ -30,19 +32,17 @@ public class AddEmployeeApiDelegateTest {
 	@Before
 	public void setUp() {
 		List<Employee> employees = new ArrayList<Employee>();
-		Employee admin=new Employee("Admin",null);
+		Employee admin=new Employee("admin",null);
 		Employee instructor1 = new Employee("I1", admin);
 		employees.add(instructor1);
 		employees.add(admin);
-		employees.add(new Employee("I2",admin));
-		employees.add(new Employee("I3",instructor1));
-		delegate = new AddEmployeeApiDelegateImpl(mockService);
+		delegate = new AddEmployeeApiDelegateImpl(mockService,mapper);
 	}
 
 	@Test
 	public void addEmployeeIsOk() throws Exception {
 
-		ResponseEntity response = delegate.addEmployee("Instructor4","mandeep");
+		ResponseEntity<EmployeeDTO> response = delegate.addEmployee("admin","I1");
 		assertEquals(HttpStatus.OK, response.getStatusCode());
 	}
 }

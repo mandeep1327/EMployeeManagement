@@ -17,4 +17,13 @@ public class RestMapper {
 				.collect(Collectors.toList());
 		return response;
 	}
+	public EmployeeDTO createEmployeeModelToDto(Employee employee) {
+		EmployeeDTO response=new EmployeeDTO();
+		response.setEmployeeId(employee.getEmployeeId());
+		response.setEmpName(employee.getEmpName());
+		if(null!=employee.getParent()) {
+			response.setParent(employee.getParent().getEmpName());
+		}
+		return response;
+	}
 }

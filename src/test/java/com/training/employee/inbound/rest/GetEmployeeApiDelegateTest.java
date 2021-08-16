@@ -33,13 +33,11 @@ public class GetEmployeeApiDelegateTest {
 	@Before
 	public void setUp() {
 		employees = new ArrayList<Employee>();
-		Employee admin = new Employee("Admin", null);
+		Employee admin = new Employee("admin", null);
 		Employee instructor1 = new Employee("I1", admin);    //get(0)
 		employees.add(instructor1);
 		employees.add(admin);
-
-		employees.add(new Employee("I3", instructor1));  //get(1)
-		when(mockService.findByName(any())).thenReturn(employees);   //get(2)
+		when(mockService.findByName(any())).thenReturn(employees);
 		delegate = new GetEmployeeApiDelegateImpl(mockService, mapper);
 	}
 
@@ -49,7 +47,7 @@ public class GetEmployeeApiDelegateTest {
 		List<EmployeeDTO> employees = response.getBody();
 		assertEquals(HttpStatus.OK, response.getStatusCode());
 		assertEquals("I1", employees.get(0).getEmpName());
-		assertEquals("Admin", employees.get(0).getParent());
+		assertEquals("admin", employees.get(0).getParent());
 	}
 
 }

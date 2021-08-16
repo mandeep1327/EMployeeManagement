@@ -19,14 +19,12 @@ public class EmployeeRepositoryMock {
 		return employees;
 	}
 
-
+	public Employee getAdmin(){
+		return new Employee("admin",null);
+	}
 	private List<Employee> getMockEmployees(){
-		Employee admin=new Employee("Admin",null);
-		Employee instructor1 = new Employee("I1", admin);
-		employees.add(instructor1);
-		employees.add(admin);
-		employees.add(new Employee("I2",admin));
-		employees.add(new Employee("I3",instructor1));
+		Employee root=getAdmin();
+		employees.add(root);
 		return employees;
 	}
 
