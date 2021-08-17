@@ -65,10 +65,10 @@ public class Employee implements Serializable {
 	@Override
 	public String toString() {
 		return "Employee{" +
-				"employeeId='" + employeeId + '\'' +
-				"empName='" + empName + '\'' +
-				", parent=" + (parent==null?"null":parent.getEmpName()) +
+				" employeeId='" + employeeId + '\'' +
+				",empName='" + empName + '\'' +
+				", parent=" + (null==parent?"null": parent.getEmpName()) +
+				", subordinates=" + subordinates.size() +
 				'}';
 	}
-
 }

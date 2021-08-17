@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 
 /**
@@ -33,11 +32,9 @@ public class GetEmployeeServiceImpl implements GetEmployeeService {
 	public List<Employee> findById(EmployeeDTO inputDTO) {
 		int index=employeeIndex.get(String.valueOf(inputDTO.getParentId()));
 		List<Employee>  employees=repository.getEmployees();
-		List<Employee> response=employees.stream().filter(userEntity -> userEntity.getParent() != null)
-				.filter(employee->employee.getParent().equals(employees.get(index).getParent()))
-				.collect(Collectors.toList());
+		List<Employee> response=employees.get(index).getSubordinates();
 		if(response.size()==0){
-			throw new NotFoundException("Employee not found, id: " + inputDTO.getParentId());
+			throw new NotFoundException("Subordinate not found for id, " + inputDTO.getParentId()+ " : Please add first");
 		}
 		return response;
 	}

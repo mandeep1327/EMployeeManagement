@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 
 /**
@@ -23,8 +24,9 @@ public class AddEmployeeServiceImpl implements AddEmployeeService {
     private final AddEmployeeRepository repository;
     List<Employee> employees;
     Map<String,Integer> employeeIndex;
-    int nextId =1;
-    public AddEmployeeServiceImpl(AddEmployeeRepository repository, List<Employee> employees,  Map<String,Integer> employeeIndex) {
+
+
+    public AddEmployeeServiceImpl(AddEmployeeRepository repository, List<Employee> employees, Map<String,Integer> employeeIndex) {
         this.employees = employees;
         this.repository = repository;
         this.employeeIndex=employeeIndex;
@@ -38,13 +40,17 @@ public class AddEmployeeServiceImpl implements AddEmployeeService {
         }
         Employee employee = employees.get(currentIndex);
         Employee subordinate = new Employee(inputDTO.getEmpName(), employee);
-        subordinate.setEmployeeId(String.valueOf(nextId));
+        subordinate.setEmployeeId(String.valueOf(getNextId()));
         employee.addSubordinate(subordinate);
-      Employee savedEmployee=repository.addEmployee(subordinate);
-        employeeIndex.put(String.valueOf(nextId), currentIndex + 1);
-        nextId++;
-
+        Employee savedEmployee=repository.addEmployee(subordinate);
+        employeeIndex.put(String.valueOf(subordinate.getEmployeeId()), currentIndex + 1);
+        employees.stream().forEach(System.out::println);
         return savedEmployee;
     }
 
+    private int getNextId(){
+        Random rand = new Random();
+        int nextId= rand.nextInt(1000);
+        return nextId;
+    }
 }
