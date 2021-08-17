@@ -31,11 +31,10 @@ public class GetEmployeeServiceImpl implements GetEmployeeService {
 
 	@Override
 	public List<Employee> findById(EmployeeDTO inputDTO) {
-		List<Employee>  employees=repository.getEmployees();
 		int index=employeeIndex.get(String.valueOf(inputDTO.getParentId()));
-		Employee emp=employees.get(index);
+		List<Employee>  employees=repository.getEmployees();
 		List<Employee> response=employees.stream().filter(userEntity -> userEntity.getParent() != null)
-				.filter(empl->empl.getParent().equals(emp.getParent()))
+				.filter(employee->employee.getParent().equals(employees.get(index).getParent()))
 				.collect(Collectors.toList());
 		if(response.size()==0){
 			throw new NotFoundException("Employee not found, id: " + inputDTO.getParentId());
