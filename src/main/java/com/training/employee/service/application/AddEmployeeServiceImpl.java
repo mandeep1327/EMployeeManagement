@@ -41,20 +41,10 @@ public class AddEmployeeServiceImpl implements AddEmployeeService {
         subordinate.setEmployeeId(String.valueOf(nextId));
         employee.addSubordinate(subordinate);
         repository.addEmployee(subordinate);
-        System.out.println("Subordinate="+employee.getSubordinates().size());
         employeeIndex.put(String.valueOf(nextId), currentIndex + 1);
         nextId++;
 
-        return getEmployee(employee.getEmployeeId());
+        return employee;
     }
-
-    private Employee getEmployee(String employeeId) {
-        Employee emp= employees.get(employeeIndex.get(employeeId));
-        if(emp==null){
-            throw new NotFoundException("Parent not found, id: " + employeeId);
-        }
-        return emp;
-    }
-
 
 }
