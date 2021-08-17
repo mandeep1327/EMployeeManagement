@@ -1,7 +1,7 @@
 
 package com.training.employee.inbound.rest;
 
-import com.training.employee.inbound.rest.dto.EmployeeDTO;
+import com.training.employee.inbound.rest.dto.EmployeeResponseDTO;
 import com.training.employee.service.model.Employee;
 import com.training.employee.service.ports.GetEmployeeService;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,7 +11,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,13 +21,13 @@ import static org.mockito.Mockito.when;
 
 
 @ExtendWith(SpringExtension.class)
-public class GetEmployeeApiDelegateTest {
+public class GetEmployeeApiTest {
 
 	@MockBean
 	private GetEmployeeService mockService;
 	private RestMapper mapper = new RestMapper();
 
-	private GetEmployeeApiDelegate delegate;
+	private GetEmployeeApi delegate;
 	private List<Employee> employees = null;
 
 
@@ -40,13 +39,13 @@ public class GetEmployeeApiDelegateTest {
 		employees.add(instructor1);
 		employees.add(admin);
 		when(mockService.findById(any())).thenReturn(employees);
-		delegate = new GetEmployeeApiDelegateImpl(mockService, mapper);
+		delegate = new GetEmployeeApiImpl(mockService, mapper);
 	}
 
 	@Test
 	public void getEmployee() throws Exception {
-		ResponseEntity<List<EmployeeDTO>> response = delegate.getEmployees("I1");
-		List<EmployeeDTO> employees = response.getBody();
+		ResponseEntity<List<EmployeeResponseDTO>> response = delegate.getEmployees("I1");
+		List<EmployeeResponseDTO> employees = response.getBody();
 		assertEquals(HttpStatus.OK, response.getStatusCode());
 		assertEquals("I1", employees.get(0).getEmpName());
 		assertEquals("admin", employees.get(0).getParentId());
