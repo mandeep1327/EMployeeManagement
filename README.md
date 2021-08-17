@@ -21,8 +21,9 @@ input as Request Body:
 
 Get Api: 
 http://localhost:8085/V1/getEmployees/
-input : {id} as Query Param 
 
+input : {id} as Query Param 
+ id=0
 output:   {
 "empName": "I1",
 "parent": "admin"
