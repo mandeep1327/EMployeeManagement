@@ -7,6 +7,6 @@ import com.training.employee.service.model.Employee;
  */
 public interface AddEmployeeRepository {
 
-	 void addEmployee(Employee employee);
+	 Employee addEmployee(Employee employee);
 	
 }

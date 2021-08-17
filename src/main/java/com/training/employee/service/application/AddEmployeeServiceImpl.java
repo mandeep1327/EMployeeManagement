@@ -40,11 +40,11 @@ public class AddEmployeeServiceImpl implements AddEmployeeService {
         Employee subordinate = new Employee(inputDTO.getEmpName(), employee);
         subordinate.setEmployeeId(String.valueOf(nextId));
         employee.addSubordinate(subordinate);
-        repository.addEmployee(subordinate);
+      Employee savedEmployee=repository.addEmployee(subordinate);
         employeeIndex.put(String.valueOf(nextId), currentIndex + 1);
         nextId++;
 
-        return employee;
+        return savedEmployee;
     }
 
 }

@@ -15,8 +15,9 @@ public class AddEmployeeRepositoryImpl implements AddEmployeeRepository {
 	}
 
 	@Override
-	public  void addEmployee(Employee emp) {
+	public  Employee addEmployee(Employee emp) {
 		employees.add(emp);
+		return emp;
 	}
 
 
