@@ -23,7 +23,7 @@ Get Api:
 http://localhost:8085/V1/getEmployees/
 
 input : {id} as Query Param 
- id=1
+ id=0
 output:   {
 "empName": "I1",
 "parentName": "admin"
