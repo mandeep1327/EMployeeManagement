@@ -41,7 +41,7 @@ public class AddEmployeeServiceImpl implements AddEmployeeService {
         subordinate.setEmployeeId(String.valueOf(nextId));
         employee.addSubordinate(subordinate);
         repository.addEmployee(subordinate);
-
+        System.out.println("Subordinate="+employee.getSubordinates().size());
         employeeIndex.put(String.valueOf(nextId), currentIndex + 1);
         nextId++;
 

@@ -14,6 +14,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static org.mockito.Mockito.when;
 
@@ -27,11 +28,12 @@ public class GetEmployeeServiceTest {
     EmployeeRepositoryMock mock=new EmployeeRepositoryMock();
 
     private  List<Employee> employees=new ArrayList<>();
-
+    private Map<String,Integer> employeeIndex;
     @BeforeEach
     public void setup() {
-        service = new GetEmployeeServiceImpl(employeeRepository);
         EmployeeRepositoryMock empMockData=new EmployeeRepositoryMock();
+        employeeIndex=empMockData.getEmployeeIndex();
+        service = new GetEmployeeServiceImpl(employeeRepository,employeeIndex);
         employees=empMockData.getEmployees();
 
     }

@@ -48,7 +48,7 @@ public class GetEmployeeApiTest {
 		List<EmployeeResponseDTO> employees = response.getBody();
 		assertEquals(HttpStatus.OK, response.getStatusCode());
 		assertEquals("I1", employees.get(0).getEmpName());
-		assertEquals("admin", employees.get(0).getParentId());
+		assertEquals("admin", employees.get(0).getParentName());
 	}
 
 }

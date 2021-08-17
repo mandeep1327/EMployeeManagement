@@ -2,14 +2,14 @@ package com.training.employee.inbound.rest.dto;
 
 public class EmployeeResponseDTO {
     private String empName;
-    private String parentId;
+    private String parentName;
 
     public EmployeeResponseDTO(){
 
     }
-    public EmployeeResponseDTO(String empName, String parentId) {
+    public EmployeeResponseDTO(String empName, String parentName) {
         this.empName = empName;
-        this.parentId = parentId;
+        this.parentName = parentName;
     }
 
     public String getEmpName() {
@@ -20,12 +20,12 @@ public class EmployeeResponseDTO {
         this.empName = empName;
     }
 
-    public String getParentId() {
-        return parentId;
+    public String getParentName() {
+        return parentName;
     }
 
-    public void setParentId(String parentId) {
-        this.parentId = parentId;
+    public void setParentName(String parentName) {
+        this.parentName = parentName;
     }
 
 
@@ -33,7 +33,7 @@ public class EmployeeResponseDTO {
     public String toString() {
         return "EmployeeDTO{" +
                 "empName='" + empName + '\'' +
-                ", nameOfAdmin='" + parentId + '\'' +
+                ", nameOfAdmin='" + parentName + '\'' +
                 '}';
     }
 }
