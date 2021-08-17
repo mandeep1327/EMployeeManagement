@@ -16,17 +16,17 @@ input as Request Body:
 "empName": "I1",
 "parentId": "0"
 }
-{0} act as parentId  
+{0} act as parentId  . it is for root admin.
 {I1} act as empName which needs to be added under this parent
 
 Get Api: 
 http://localhost:8085/V1/getEmployees/
 
 input : {id} as Query Param 
- id=0
+ id=1
 output:   {
 "empName": "I1",
-"parent": "admin"
+"parentName": "admin"
 }
 
 
