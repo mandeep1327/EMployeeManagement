@@ -1,6 +1,7 @@
 package com.training.employee.service.application;
 
 import com.training.employee.inbound.rest.dto.EmployeeDTO;
+import com.training.employee.service.exception.NotFoundException;
 import com.training.employee.service.model.Employee;
 import com.training.employee.service.ports.GetEmployeeRepository;
 import com.training.employee.service.ports.GetEmployeeService;
@@ -32,6 +33,9 @@ public class GetEmployeeServiceImpl implements GetEmployeeService {
 		List<Employee> response=employees.stream().filter(userEntity -> userEntity.getParent() != null)
 				.filter(emp->emp.getEmployeeId().equals(inputDTO.getParentId()))
 				.collect(Collectors.toList());
+		if(response.size()==0){
+			throw new NotFoundException("Employee not found, id: " + inputDTO.getParentId());
+		}
 		return response;
 	}
 

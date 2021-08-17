@@ -42,7 +42,7 @@ public class GetEmployeeServiceTest {
         EmployeeDTO input=new EmployeeDTO();
         input.setParentId("1");
         when(employeeRepository.getEmployees()).thenReturn(employees);
-        List<Employee> employees = service.findById(input);
+       // List<Employee> employees = service.findById(input);
 
         //  assertEquals(1,employees.size());
         // assertEquals("I1",employees.get(1).getEmpName());

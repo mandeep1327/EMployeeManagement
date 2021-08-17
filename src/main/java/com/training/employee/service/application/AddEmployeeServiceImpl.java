@@ -32,9 +32,10 @@ public class AddEmployeeServiceImpl implements AddEmployeeService {
 
     @Override
     public Employee addEmployees(EmployeeDTO inputDTO) {
-
         Integer currentIndex = employeeIndex.get(inputDTO.getParentId());
-        //employeeIndex.entrySet().stream().forEach(key-> System.out.println(key.getKey()+":"+key.getValue()));
+        if(null==currentIndex){
+            throw new NotFoundException("Parent not found, id: " + currentIndex);
+        }
         Employee employee = employees.get(currentIndex);
         Employee subordinate = new Employee(inputDTO.getEmpName(), employee);
         subordinate.setEmployeeId(String.valueOf(nextId));
@@ -43,14 +44,14 @@ public class AddEmployeeServiceImpl implements AddEmployeeService {
 
         employeeIndex.put(String.valueOf(nextId), currentIndex + 1);
         nextId++;
-        return  getEmployee(employee.getEmployeeId());
 
+        return getEmployee(employee.getEmployeeId());
     }
 
     private Employee getEmployee(String employeeId) {
         Employee emp= employees.get(employeeIndex.get(employeeId));
         if(emp==null){
-            throw new NotFoundException("Employee not found, id: " + employeeId);
+            throw new NotFoundException("Parent not found, id: " + employeeId);
         }
         return emp;
     }
