@@ -3,13 +3,15 @@ package com.training.employee.inbound.rest.dto;
 public class EmployeeResponseDTO {
     private String empName;
     private String parentName;
+    private String employeeId;
 
     public EmployeeResponseDTO(){
 
     }
-    public EmployeeResponseDTO(String empName, String parentName) {
+    public EmployeeResponseDTO(String empName, String parentName,String employeeId) {
         this.empName = empName;
         this.parentName = parentName;
+        this.employeeId= employeeId;
     }
 
     public String getEmpName() {
@@ -28,6 +30,13 @@ public class EmployeeResponseDTO {
         this.parentName = parentName;
     }
 
+    public String getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(String employeeId) {
+        this.employeeId = employeeId;
+    }
 
     @Override
     public String toString() {
